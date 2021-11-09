@@ -1,9 +1,10 @@
 import './lib/setup';
 import { LogLevel } from '@sapphire/framework';
 import { AddresserClient } from './lib/AddresserClient';
+import { defaultPrefix } from './config';
 
 const client = new AddresserClient({
-	defaultPrefix: process.env.DEFAULT_PREFIX,
+	defaultPrefix: defaultPrefix,
 	regexPrefix: /^(hey +)?bot[,! ]/i,
 	caseInsensitiveCommands: true,
 	logger: {
