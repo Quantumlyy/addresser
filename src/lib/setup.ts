@@ -1,6 +1,6 @@
 import '@sapphire/plugin-logger/register';
 import '@sapphire/plugin-api/register';
-import '@skyra/editable-commands/register';
+// import '@skyra/editable-commands/dist/index.mjs';
 import * as colorette from 'colorette';
 import { inspect } from 'util';
 
