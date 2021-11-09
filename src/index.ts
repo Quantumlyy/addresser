@@ -1,7 +1,8 @@
 import './lib/setup';
-import { LogLevel, SapphireClient } from '@sapphire/framework';
+import { LogLevel } from '@sapphire/framework';
+import { AddresserClient } from './lib/AddresserClient';
 
-const client = new SapphireClient({
+const client = new AddresserClient({
 	defaultPrefix: process.env.DEFAULT_PREFIX,
 	regexPrefix: /^(hey +)?bot[,! ]/i,
 	caseInsensitiveCommands: true,
