@@ -1,6 +1,5 @@
-import { SlashCommand } from './SlashCommandPiece';
 import { Store } from '@sapphire/framework';
-import { Permissions } from 'discord.js';
+import { SlashCommand } from './SlashCommandPiece';
 
 export class SlashCommandStore extends Store<SlashCommand> {
 	constructor() {
@@ -20,9 +19,12 @@ export class SlashCommandStore extends Store<SlashCommand> {
 		// iterate to all connected guilds and apply the commands.
 		const guilds = await client?.guilds?.fetch(); // retrieves Snowflake & Oauth2Guilds
 		for (let [id] of guilds) {
+			const specificGuildCmds = guildCmds.filter((cmd) => cmd.guilds.includes(id) || cmd.guilds.length === 0);
+
+			if (specificGuildCmds.size === 0) continue;
+
 			const guild = await client?.guilds?.fetch(id); // gets the guild instances from the cache (fetched before)
-			guild.me?.permissions.has(Permissions.FLAGS.USE_APPLICATION_COMMANDS);
-			await guild?.commands.set(guildCmds.map((c) => c.commandData));
+			await guild?.commands.set(specificGuildCmds.map((c) => c.commandData));
 		}
 
 		// Global commands will update over the span of an hour and is discouraged to update on development mode.
