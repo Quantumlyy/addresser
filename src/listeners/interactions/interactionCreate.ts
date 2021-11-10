@@ -13,7 +13,7 @@ export class CommandInteraction extends Listener {
 		if (!cmd) return;
 
 		try {
-			await cmd.run(interaction);
+			await cmd.interactionRun(interaction);
 			if (process.env.DEV) this.container.logger.info(`${interaction.user.id} ran slash command ${cmd.commandData.name}`);
 		} catch (e: any) {
 			this.container.logger.fatal(e);

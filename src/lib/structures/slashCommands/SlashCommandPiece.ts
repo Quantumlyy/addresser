@@ -28,7 +28,7 @@ export abstract class SlashCommand extends Piece {
 		this.guilds = options.guilds ?? [];
 	}
 
-	public abstract run(interaction: CommandInteraction): Awaitable<unknown>;
+	public abstract interactionRun(interaction: CommandInteraction): Awaitable<unknown>;
 }
 
 export type Options = ApplicationCommandData & {
