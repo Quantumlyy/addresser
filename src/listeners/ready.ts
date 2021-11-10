@@ -14,9 +14,26 @@ export class UserEvent extends Listener {
 		});
 	}
 
-	public run() {
+	public async run() {
+		await this.createSlashCommands();
+
 		this.printBanner();
 		this.printStoreDebugInformation();
+	}
+
+	async createSlashCommands() {
+		// this function will tell the SlashCommandStore to update the global and guild commands
+		const slashCommandsStore = this.container.stores.get('slashCommands');
+
+		if (slashCommandsStore) {
+			try {
+				this.container.logger.info('Started refreshing application (/) commands.');
+				await slashCommandsStore.registerCommands();
+				this.container.logger.info('Successfully reloaded application (/) commands.');
+			} catch (err: any) {
+				this.container.logger.error(err);
+			}
+		}
 	}
 
 	private printBanner() {
