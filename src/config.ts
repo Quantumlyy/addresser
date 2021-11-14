@@ -27,3 +27,8 @@ export const infuraProjectID = infuraProjectIDSchema.parse(process.env.INFURA_PR
 
 const infuraProjectSecretSchema = z.string();
 export const infuraProjectSecret = infuraProjectSecretSchema.parse(process.env.INFURA_PROJECT_SECRET);
+
+const uniswapV3SubgraphURLSchema = z
+	.string()
+	.default('https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3');
+export const uniswapV3SubgraphURL = uniswapV3SubgraphURLSchema.parse(process.env.SUBGRAPH_UNISWAP_V3);
